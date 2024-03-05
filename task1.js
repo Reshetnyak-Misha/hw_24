@@ -1,17 +1,20 @@
 function createCurrencyConverter(rate) {
+    const localeRate = rate;
+
     return {
-        rate: rate,
         toLocalCurrency: function (value) {
             if (isNaN(value) && value > 0) {
                 return console.error("Error");
             }
-            return value * this.rate;
+            let resultConvertEUR = value * localeRate;
+            return resultConvertEUR.toLocaleString('es-ES' , {style: 'currency', currency: 'EUR'});
         },
         toForeignCurrency: function (value) {
             if (isNaN(value) && value > 0) {
                 return console.error("Error");
             } else {
-                return value / this.rate;
+                let resultConvertUSD = value / localeRate;
+                return resultConvertUSD.toLocaleString('en-US' , {style: 'currency', currency: 'USD'});
             }
         }
     }

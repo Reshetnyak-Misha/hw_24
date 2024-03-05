@@ -1,5 +1,6 @@
 function createInvestmentAccount(initialAmount, annualInterestRate) {
     let localMoney = initialAmount;
+    let interestRate = annualInterestRate / 100;
     let finalResult = 0;
 
     return {
@@ -18,8 +19,9 @@ function createInvestmentAccount(initialAmount, annualInterestRate) {
         },
         calculateProfit: function (years) { //Высчитать прибыль от процентной ставки с годами
             if (localMoney > 0) {
-                const profit = (localMoney * annualInterestRate) / 100;
-                const result = localMoney + (profit * years);
+                const profit = localMoney * Math.pow(1 + interestRate, years) - localMoney;
+                let result = 0;
+                result += profit;
                 finalResult = result.toFixed(2);
                 return console.log(result.toFixed(2));
             }
@@ -31,9 +33,9 @@ function createInvestmentAccount(initialAmount, annualInterestRate) {
 }
 
 const createMoney = createInvestmentAccount(1000, 5);// createInvestmentAccount(баланс и процент)
-createMoney.deposit(500);
+createMoney.deposit(1000);
 createMoney.allMoney();
-createMoney.withdraw(1000);
+createMoney.withdraw(5000);
 createMoney.calculateProfit(3);
 createMoney.getAccountInfo();
 
